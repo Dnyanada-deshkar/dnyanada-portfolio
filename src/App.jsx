@@ -56,14 +56,14 @@ function About() {
   return (<section id="about" className="sec split">
     <R><p className="kicker">About</p><h2>A little about me.</h2></R>
     <R className="txt">
-      <p>I'm a Computer Science graduate from RTMNU, Nagpur (B.Tech, 2022–2026), and I've spent my early career writing production code in both Java and .NET.</p>
+      <p>I'm a Computer Science graduate from KDK College of Engineering, Nagpur (B.Tech, 2022–2026), and I've spent my early career writing production code in both Java and .NET.</p>
       <p>I like the parts of software people rarely see: clean API design, well-structured databases, and workflows that make a manual process dependable. My interests are backend development, REST APIs, database design, full-stack development and scalable application architecture.</p>
     </R></section>)
 }
 
 function Experience() {
   return (<section id="experience" className="sec alt"><R><p className="kicker">Experience</p><h2>Where I've worked.</h2></R>
-    <ol className="tl">{jobs.map((j, i) => <li key={j.co} className={i === 0 ? 'cur' : ''}><R className="card">
+    <ol className="tl">{jobs.map((j, i) => <li key={j.co} className={i === 0 ? 'now' : ''}><R className="card">
       <div className="meta"><p className="when">{j.when}</p><p>{j.where}</p>{i === 0 && <span className="badge">Current</span>}</div>
       <div className="body"><h3>{j.role}</h3><p className="co">{j.co}</p>
         <ul className="stats">{j.stats.map(([v, l]) => <li key={l}><b>{v}</b>{l}</li>)}</ul>
@@ -74,8 +74,8 @@ function Experience() {
 function Shots({ p }) {
   const n = p.shots.length, [i, setI] = useState(0), go = (d) => setI((i + d + n) % n)
   return (<div className="browser" role="group" aria-roledescription="carousel" aria-label={`${p.title} screenshots`}>
-    <div className="bar"><i /><i /><i /><span>{p.title}</span></div>
-    <div className="screen">
+    <div className="bar"><i /><i /><i /><span>{p.title}{p.shotLabel ? ` · ${p.shotLabel}` : ''}</span></div>
+    <div className="screen" style={p.ratio ? { aspectRatio: p.ratio } : undefined}>
       {n ? <img key={i} src={p.shots[i]} alt={`${p.title} screenshot ${i + 1} of ${n}`} loading="lazy" />
         : <div className="ph"><div className="sk"><i /><i /><i /></div><b>Screenshots coming soon</b><span>Add images to public/projects/{p.slug}/ and list them in data.js</span></div>}
       {n > 1 && <><button className="nb prev" aria-label="Previous screenshot" onClick={() => go(-1)}>‹</button><button className="nb next" aria-label="Next screenshot" onClick={() => go(1)}>›</button></>}
@@ -112,17 +112,30 @@ function Education() {
 }
 
 function Contact({ toast }) {
-  const [f, setF] = useState({ name: '', email: '', subject: '', message: '' }), [err, setErr] = useState({}), [state, setState] = useState('')
+  const empty = { name: '', email: '', subject: '', message: '' }
+  const [f, setF] = useState(empty), [err, setErr] = useState({}), [state, setState] = useState(''), [busy, setBusy] = useState(false), [fail, setFail] = useState(false)
   const copy = async () => { try { await navigator.clipboard.writeText(P.email); toast('Email copied to clipboard') } catch { toast('Copy failed. Email: ' + P.email) } }
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault(); const x = {}
     if (!f.name.trim()) x.name = 'Enter your name.'
     if (!/^\S+@\S+\.\S+$/.test(f.email)) x.email = 'Enter a valid email address.'
     if (!f.subject.trim()) x.subject = 'Enter a subject.'
     if (f.message.trim().length < 10) x.message = 'Write at least 10 characters.'
     setErr(x); if (Object.keys(x).length) { setState(''); return }
-    location.href = `mailto:${P.email}?subject=${encodeURIComponent(f.subject)}&body=${encodeURIComponent(`${f.message}\n\n— ${f.name} (${f.email})`)}`
-    setState('Your email app should open with the message ready. Press send there to deliver it.')
+    const KEY = import.meta.env.VITE_WEB3FORMS_KEY
+    if (!KEY) { // fallback when no form service key is configured
+      location.href = `mailto:${P.email}?subject=${encodeURIComponent(f.subject)}&body=${encodeURIComponent(`${f.message}\n\n— ${f.name} (${f.email})`)}`
+      setFail(false); setState('Your email app should open with the message ready. Press send there to deliver it.'); return
+    }
+    setBusy(true); setState(''); setFail(false)
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_key: KEY, name: f.name, email: f.email, subject: `Portfolio: ${f.subject}`, message: f.message, from_name: 'Portfolio contact form' }) })
+      const d = await r.json()
+      if (!r.ok || !d.success) throw new Error('send failed')
+      setState('Thanks, your message was sent. I will get back to you soon.'); setF(empty)
+    } catch { setFail(true); setState(`The message could not be sent. Please email me directly at ${P.email}.`) }
+    setBusy(false)
   }
   const fld = (k, label, tag = 'input') => { const T = tag; return <label>{label}<T value={f[k]} rows={5} aria-invalid={!!err[k]} onChange={(e) => setF({ ...f, [k]: e.target.value })} />{err[k] && <small role="alert">{err[k]}</small>}</label> }
   return (<section id="contact" className="sec contact">
@@ -131,7 +144,7 @@ function Contact({ toast }) {
       <ul className="cl"><li>{P.location}</li><li><a href={`mailto:${P.email}`}>{P.email}</a></li><li><a href={`tel:${P.phone.replace(/\s/g, '')}`}>{P.phone}</a></li></ul>
       <div className="row"><a className="btn gold" href={`mailto:${P.email}`}>Email me</a><button className="btn ghost light" onClick={copy}>Copy email</button><a className="btn ghost light" href={P.linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a className="btn ghost light" href={P.github} target="_blank" rel="noreferrer">GitHub</a><a className="btn ghost light" {...RESUME}>Resume</a></div></R>
     <R><form onSubmit={submit} noValidate>{fld('name', 'Name')}{fld('email', 'Email')}{fld('subject', 'Subject')}{fld('message', 'Message', 'textarea')}
-      <button className="btn gold" type="submit">Send message</button>{state && <p className="ok" role="status">{state}</p>}</form></R></section>)
+      <button className="btn gold" type="submit" disabled={busy}>{busy ? 'Sending…' : 'Send message'}</button>{state && <p className={`ok ${fail ? 'fail' : ''}`} role={fail ? 'alert' : 'status'}>{state}</p>}</form></R></section>)
 }
 
 function Footer() {
