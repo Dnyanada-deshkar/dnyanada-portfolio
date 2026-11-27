@@ -20,34 +20,30 @@ export const jobs = [
 ]
 // shots: list image paths, e.g. ['/projects/digibag/1.png']. github / demo: add URLs when ready (buttons appear automatically).
 export const projects = [
-  { slug: 'digibag', title: 'DigiBag', sub: 'Digital School Bag', github: '', demo: '', shots: [],
-    stack: ['Java', 'Spring Boot', 'REST APIs', 'Spring Security', 'React.js', 'SQL'],
-    about: 'A school management platform supporting three user roles.',
-    pts: ['Built 10+ REST APIs with Spring Boot.', 'Developed functionality across 5+ modules.', 'Centralized exception handling with @ControllerAdvice.', 'Validated 15+ REST endpoints in Postman.', 'Worked in a 3-member Git-based Agile team.'] },
-  { slug: 'sales-target-report', title: 'Sales Target Report', sub: 'Management System', github: '', demo: '', shots: [],
-    stack: ['ASP.NET Web Forms', 'C#', 'SQL Server', 'Stored Procedures'],
-    about: 'Manages business partners, monthly sales targets and daily sales records.',
-    pts: ['Managed 100+ business partners and 1,000+ daily sales records.', 'Built 5 integrated modules.', 'Developed 15+ SQL stored procedures.', 'Added CRUD, pagination, validation, dashboard analytics and automated target balance calculations.', 'Reduced manual effort by 80%.'] },
-  { slug: 'cht-management', title: 'CHT Management System', sub: 'Digitizing Civil Transport Operations', github: '', demo: '', shots: [],
+  { slug: 'cht-management', title: 'CHT Management System', sub: 'Digitizing Civil Transport Operations', github: '', demo: '', shots: ['/projects/cht-management/1-login.jpg', '/projects/cht-management/2-dashboard.jpg', '/projects/cht-management/3-indent-registration.jpg', '/projects/cht-management/4-vehicle-demand-confirmation.jpg', '/projects/cht-management/5-transport-utilization.jpg', '/projects/cht-management/6-log-register.jpg'],
     stack: ['ASP.NET Core Web API', '.NET 8', 'C#', 'EF Core', 'SQL Server', 'HTML', 'CSS', 'JavaScript', 'JWT'],
     about: 'Transformed a paper-driven transport management process into a centralized web application, connecting 5 master modules, 57 contract-rate records and a 6-stage operational workflow.',
     pts: ['Centralized indent registration and sequential Clerk/CIO approvals.', 'Enabled vendor allocation and individual vehicle/driver tracking.', 'Digitized 2 operational registers and transport utilization records.', 'Added vehicle-photo and document uploads with printable transport forms.'] },
-  { slug: 'stationery-inventory', title: 'Stationery Inventory Management System', sub: 'Web API migration', github: '', demo: '', shots: [],
-    stack: ['C#', 'ASP.NET MVC 5', 'ASP.NET Web API 2', 'SQL Server', 'ADO.NET', 'jQuery', 'Bootstrap', 'iTextSharp'],
-    about: 'Migrated 4 inventory modules to RESTful Web APIs while preserving the existing UI.',
-    pts: ['Developed 30 API actions and integrated 24 SQL Server stored procedures using ADO.NET.', 'Automated multi-item purchase calculations and added inventory KPIs, low-stock alerts, image uploads and PDF reports.'] },
-  { slug: 'insurance-management', title: 'Insurance Management System', sub: 'Database-led project', github: '', demo: '', shots: [],
-    stack: ['Oracle SQL', 'Database Design', 'Application Development'],
-    about: 'An insurance management project covering database design, structured data management and application workflows.',
-    pts: ['Worked on normalized database design.', 'Optimized SQL queries.', 'End-to-end application development.'] },
-  { slug: 'booktrack', title: 'BookTrack', sub: 'Library Management System · Academic project', github: '', demo: '', shots: [],
+  { slug: 'sales-target-report', title: 'Sales Target Report', sub: 'Management System', github: '', demo: '', shots: ['/projects/sales-target-report/1-login.jpg', '/projects/sales-target-report/2-dashboard.jpg', '/projects/sales-target-report/3-dashboard-activity.jpg', '/projects/sales-target-report/4-partner-master.jpg', '/projects/sales-target-report/5-daily-sales.jpg', '/projects/sales-target-report/6-reports.jpg'],
+    stack: ['ASP.NET Web Forms', 'C#', 'SQL Server', 'Stored Procedures'],
+    about: 'Manages business partners, monthly sales targets and daily sales records.',
+    pts: ['Managed 100+ business partners and 1,000+ daily sales records.', 'Built 5 integrated modules.', 'Developed 15+ SQL stored procedures.', 'Added CRUD, pagination, validation, dashboard analytics and automated target balance calculations.', 'Reduced manual effort by 80%.'] },
+  { slug: 'digibag', title: 'DigiBag', sub: 'Digital School Bag', github: '', demo: '', shots: ['/projects/digibag-v2/db2-1-login.jpg', '/projects/digibag-v2/db2-2-dashboard.jpg', '/projects/digibag-v2/db2-3-my-classes.jpg', '/projects/digibag-v2/db2-4-upload-notes.jpg', '/projects/digibag-v2/db2-5-assignments.jpg', '/projects/digibag-v2/db2-6-students.jpg'], ratio: '16/9', shotLabel: 'UI mockups',
+    stack: ['Java', 'Spring Boot', 'REST APIs', 'Spring Security', 'React.js', 'SQL'],
+    about: 'A school management platform supporting three user roles.',
+    pts: ['Built 10+ REST APIs with Spring Boot.', 'Developed functionality across 5+ modules.', 'Centralized exception handling with @ControllerAdvice.', 'Validated 15+ REST endpoints in Postman.', 'Worked in a 3-member Git-based Agile team.'] },
+  { slug: 'booktrack', title: 'BookTrack', sub: 'Library Management System · Academic project', github: '', demo: '', shots: ['/projects/booktrack/booktrack-1-home.jpg', '/projects/booktrack/booktrack-2-login.jpg', '/projects/booktrack/booktrack-3-student-dashboard.jpg', '/projects/booktrack/booktrack-4-admin-dashboard.jpg', '/projects/booktrack/booktrack-5-student-profile.jpg', '/projects/booktrack/booktrack-6-admin-profile.jpg'],
     stack: ['Relational Database Design', 'CRUD Operations', 'Database Management'], // TODO: replace with the actual technologies you used
     about: 'A library management system with 4 core modules (Book Management, Member Management, Book Issue and Return) built to centralize library operations and reduce manual record handling.',
     pts: ['Implemented 20+ CRUD operations across book and member records using structured database queries.', 'Designed 5+ relational tables for book inventory, member information and circulation records.', 'Implemented book availability and issue-return tracking across 3 key workflows.'] },
-  { slug: 'portfolio', title: 'Developer Portfolio', sub: 'This website · React and UI design', github: '', demo: '', shots: [],
-    stack: ['React.js', 'Vite', 'JavaScript', 'HTML', 'CSS'],
-    about: 'My personal portfolio, designed and built from scratch as a responsive single-page React app.',
-    pts: ['Built with reusable React components and a single data file that drives every section.', 'Designed the visual system: warm plum, cream and mustard palette, editorial typography and layout grid.', 'Added interactive pieces: project screenshot carousel, skill category filters, scroll progress and a validated contact form.', 'Made it responsive and accessible, with semantic HTML, keyboard navigation and reduced-motion support.'] },
+  { slug: 'stationery-inventory', title: 'Stationery Inventory Management System', sub: 'Web API migration', github: '', demo: '', shots: ['/projects/stationery-inventory/stationery-1-login.jpg', '/projects/stationery-inventory/stationery-2-dashboard.jpg', '/projects/stationery-inventory/stationery-3-dashboard-recent.jpg', '/projects/stationery-inventory/stationery-4-purchase-entry.jpg', '/projects/stationery-inventory/stationery-5-purchase-list.jpg', '/projects/stationery-inventory/stationery-6-purchase-report.jpg'],
+    stack: ['C#', 'ASP.NET MVC 5', 'ASP.NET Web API 2', 'SQL Server', 'ADO.NET', 'jQuery', 'Bootstrap', 'iTextSharp'],
+    about: 'Migrated 4 inventory modules to RESTful Web APIs while preserving the existing UI.',
+    pts: ['Developed 30 API actions and integrated 24 SQL Server stored procedures using ADO.NET.', 'Automated multi-item purchase calculations and added inventory KPIs, low-stock alerts, image uploads and PDF reports.'] },
+  { slug: 'insurance-management', title: 'Insurance Management System', sub: 'Database-led project', github: '', demo: '', shots: ['/projects/insurance-management/insurance-1-login.jpg', '/projects/insurance-management/insurance-2-admin-dashboard.jpg', '/projects/insurance-management/insurance-3-admin-create-user.jpg', '/projects/insurance-management/insurance-4-employee-customer-list.jpg', '/projects/insurance-management/insurance-5-agent-wallet.jpg'],
+    stack: ['Oracle SQL', 'Database Design', 'Application Development'],
+    about: 'An insurance management project covering database design, structured data management and application workflows.',
+    pts: ['Worked on normalized database design.', 'Optimized SQL queries.', 'End-to-end application development.'] },
 ]
 export const skills = {
   'Programming Languages': ['Java', 'C#', 'SQL', 'JavaScript'],
@@ -57,5 +53,5 @@ export const skills = {
   'Core Computer Science': ['Object-Oriented Programming', 'Collections Framework', 'String Handling and Mutability', 'Exception Handling', 'Concurrency and Multithreading'],
   'Developer Tools': ['Git', 'GitHub', 'Maven', 'Postman', 'Visual Studio', 'Eclipse'],
 }
-export const edu = { deg: 'B.Tech in Computer Science', school: 'RTMNU, Nagpur', when: '2022–2026', extra: 'CGPA 7.8' }
+export const edu = { deg: 'B.Tech in Computer Science', school: 'KDK College of Engineering, Nagpur', when: '2022–2026', extra: 'CGPA 7.8' }
 export const certs = ['Deloitte Technology Job Simulation — Forage', 'Full Stack Java Development — Unisoft Technologies']
