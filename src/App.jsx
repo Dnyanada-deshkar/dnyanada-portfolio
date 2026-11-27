@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { P, nav, jobs, projects, skills, edu, certs } from './data.js'
 
 const id = (s) => s.toLowerCase()
-const RESUME = { href: '/resume.pdf', download: 'Dnyanada_Deshkar_Resume.pdf' }
+const RESUME = { href: '/Resume-Dnyanada.pdf', download: 'Dnyanada_Deshkar_Resume.pdf' }
 function useReveal() {
   const ref = useRef(null)
   useEffect(() => {
